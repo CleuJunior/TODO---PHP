@@ -1,4 +1,14 @@
 <?php
+    $afazeres = [];
+    if(file_exists('tarefa.json')){
+        $json = file_get_contents('tarefa.json');
+        $afazeres = json_decode($json, true);
+
+    } else{
+
+
+    }
+
 
 ?>
 
@@ -17,8 +27,20 @@
     <input type="text" name="tarefa" placeholder="Entre com sua tarefa">
     <button>Nova Tarefa</button>
 
-    
-</form>
 
+</form>
+<br>
+
+<?php foreach ($afazeres as $nomeAfazer => $afazere): ?>
+<div style="margin-bottom: 20px;">
+    <input type="checkbox" <?= $afazere['completo']? 'cheked' : '' ?>>
+    <?= $nomeAfazer; ?>
+    <form action="deletar.php" method="POST">
+        <input type="hidden" name="nome_tarefa" value="<?= $nomeAfazer; ?>">
+        <button>Apagar</button>
+    </form>
+
+</div>
+<?php endforeach; ?>
 </body>
 </html>

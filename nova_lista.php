@@ -20,3 +20,5 @@ if ($tarefas) {
     file_put_contents('tarefa.json', json_encode($jsonArray, JSON_PRETTY_PRINT));
 
 }
+
+header('Location: index.php');

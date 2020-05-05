@@ -33,14 +33,29 @@
 
 <?php foreach ($afazeres as $nomeAfazer => $afazere): ?>
 <div style="margin-bottom: 20px;">
-    <input type="checkbox" <?= $afazere['completo']? 'cheked' : '' ?>>
+    <form style="display: inline-block" action="mudar_status.php" method="POST">
+        <input type="hidden" name="nome_tarefa" value="<?= $nomeAfazer; ?>">
+        <input type="checkbox" <?= $afazere['completo']? 'checked' : '' ?>>
+
+
+    </form>
+
     <?= $nomeAfazer; ?>
-    <form action="deletar.php" method="POST">
+    <form style="display: inline-block" action="deletar.php" method="POST">
         <input type="hidden" name="nome_tarefa" value="<?= $nomeAfazer; ?>">
         <button>Apagar</button>
     </form>
 
 </div>
 <?php endforeach; ?>
+
+<script>
+     const checkboxes = document.querySelectorAll('input[type=checkbox]');
+        checkboxes.forEach(ch => {
+        ch.onclick = function () {
+            this.parentNode.submit();
+        };
+        });
+</script>
 </body>
 </html>
